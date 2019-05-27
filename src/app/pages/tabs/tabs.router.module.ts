@@ -1,17 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, CanActivate } from '@angular/router';
 
+import { TenantPage } from '../tenant/tenant.page';
 import { TabsPage } from './tabs.page';
 import { HomePage } from '../home/home.page';
 import { ListPage } from '../list/list.page';
 import { ContactPage } from '../contact/contact.page';
-import { AuthGuardService } from '../../services/auth-route-guard'
+import { AuthGuardService } from '../../services/auth-route-guard';
 
 const routes: Routes = [
   {
     path: 'tabs',
     component: TabsPage,
     children: [
+      {
+        path: 'tenant',
+        outlet: 'tenant',
+        component: TenantPage
+      },
       {
         path: 'home',
         outlet: 'home',
@@ -32,7 +38,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/tabs/(home:home)',
+    redirectTo: '/tabs/(tenant:tenant)',
     pathMatch: 'full'
   }
 ];
