@@ -32,8 +32,8 @@ Amplify.configure({
   API: {
     endpoints: [
       {
-        name: 'notes',
-        endpoint: '',
+        name: 'apv',
+        endpoint: 'https://817klbu9si.execute-api.us-east-1.amazonaws.com/DEV',
         region: 'us-east-1'
       },
     ]
