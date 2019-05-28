@@ -6,6 +6,14 @@
 
 <ion-content padding>
   <div>Enter your tenant information here.</div>
+    <ion-item>
+        <ion-label>Tenant</ion-label>
+        <ion-select placeholder="Select One" (ionChange)="onChanged($event)">
+            <ion-select-option >naberconsultingdevelopers</ion-select-option>
+            <ion-select-option >accesspointvasculardevelopers</ion-select-option>
+            <ion-select-option >reservedevelopers</ion-select-option>
+        </ion-select>
+    </ion-item>
 <!--  <amplify-authenticator framework="ionic"></amplify-authenticator>-->
   <div>{{tenantInfo}}</div>
 </ion-content>

@@ -4,10 +4,13 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
+
 import Amplify, { Analytics } from 'aws-amplify';
 // import aws_exports from './aws-exports';
 
 // Amplify.configure(aws_exports);
+
+console.log('Configuring Amplify in main.ts');
 
 // Auth configured for NABER users
 // TODO set the configuration dynamically for multi-tenant SaaS
@@ -16,19 +19,20 @@ import Amplify, { Analytics } from 'aws-amplify';
  * cognito-idp --profile DevOpsServerless list-user-pool-clients --user-pool-id us-east-1_QiLjC77MM
  * cognito-idp --profile DevOpsServerless list-user-pools --max-results 50
 */
+
 Amplify.configure({
-  Auth: {
-    mandatorySignIn: true,
-        region: 'us-east-1',
-        userPoolId: 'us-east-1_QiLjC77MM',
-        identityPoolId: 'us-east-1:6c65e17a-6c86-445e-9958-6a8b156a6d65',
-        userPoolWebClientId: '4onrn29c8jts4o7ros3ssvh6vq'
-  },
-  Storage: {
-    region: '',
-        bucket: '',
-        identityPoolId: ''
-  },
+  // Auth: {
+  //   mandatorySignIn: true,
+  //       region: 'us-east-1',
+  //       userPoolId: 'us-east-1_QiLjC77MM',
+  //       identityPoolId: 'us-east-1:6c65e17a-6c86-445e-9958-6a8b156a6d65',
+  //       userPoolWebClientId: '4onrn29c8jts4o7ros3ssvh6vq'
+  // },
+  // Storage: {
+  //   region: '',
+  //       bucket: '',
+  //       identityPoolId: ''
+  // },
   API: {
     endpoints: [
       {

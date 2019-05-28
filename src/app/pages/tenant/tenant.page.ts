@@ -3,6 +3,7 @@ import { Events } from '@ionic/angular';
 import { AuthGuardService } from '../../services/auth-route-guard';
 import { AmplifyService } from 'aws-amplify-angular';
 import Amplify, { Analytics } from 'aws-amplify';
+// import { TenantConfig} from '../../services/tenant-config';
 
 
 @Component({
@@ -33,40 +34,30 @@ export class TenantPage implements AfterContentInit {
     });
   }
 
-  ngAfterContentInit() {
-    this.events.publish('data:AuthState', this.authState);
-    this.amplifyService.api().get('apv', `/idp/naberconsultingdevelopers`, {}).then((res) => {
+  onChanged(selection) {
+    this.amplifyService.api().get('apv', '/idp/' + selection.detail.text, {}).then((res) => {
       if (!res) {
         console.log('no res available to log');
       } else {
-        console.log(JSON.stringify(res));
+        // console.log(JSON.stringify(res));
         this.tenantInfo = JSON.stringify(res);
         Amplify.configure({
           Auth: {
             mandatorySignIn: true,
-            region: res.region,
-            userPoolId: res.id_userpool,
-            identityPoolId: res.id_pool,
-            userPoolWebClientId: res.id_client
-          },
-          Storage: {
-            region: '',
-            bucket: '',
-            identityPoolId: ''
-          },
-          API: {
-            endpoints: [
-              {
-                name: 'apv',
-                endpoint: 'https://817klbu9si.execute-api.us-east-1.amazonaws.com/DEV',
-                region: 'us-east-1'
-              },
-            ]
+            region: res.Item.region,
+            userPoolId: res.Item.id_userpool,
+            identityPoolId: res.Item.id_pool,
+            userPoolWebClientId: res.Item.id_client
           }
         });
       }
     }).catch((err) => {
-          console.log('Error getting list:', err);
+      console.log('Error getting identity pool information:', err);
     });
+
+  }
+
+  ngAfterContentInit() {
+    this.events.publish('data:AuthState', this.authState);
   }
 }
