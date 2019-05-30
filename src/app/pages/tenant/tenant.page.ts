@@ -2,6 +2,7 @@ import { Component, AfterContentInit } from '@angular/core';
 import { Events } from '@ionic/angular';
 import { AuthGuardService } from '../../services/auth-route-guard';
 import { AmplifyService } from 'aws-amplify-angular';
+import { Auth } from 'aws-amplify';
 import Amplify, { Analytics } from 'aws-amplify';
 // import { TenantConfig} from '../../services/tenant-config';
 
@@ -48,6 +49,15 @@ export class TenantPage implements AfterContentInit {
             userPoolId: res.Item.id_userpool,
             identityPoolId: res.Item.id_pool,
             userPoolWebClientId: res.Item.id_client
+          },
+          API: {
+            endpoints: [
+              {
+                name: 'apv',
+                endpoint: 'https://817klbu9si.execute-api.us-east-1.amazonaws.com/DEV',
+                region: 'us-east-1'
+              },
+            ]
           }
         });
       }
@@ -59,5 +69,19 @@ export class TenantPage implements AfterContentInit {
 
   ngAfterContentInit() {
     this.events.publish('data:AuthState', this.authState);
+  }
+
+  getProfile() {
+    console.log(Auth.currentSession());
+    debugger;
+    this.amplifyService.api().get('apv', '/user/profile/  ', {}).then((res) => {
+      if (!res) {
+        console.log('no response from /user/profile');
+      } else {
+        console.log(JSON.stringify(res));
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
   }
 }

@@ -5,7 +5,6 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TenantConfig } from '../app/services/tenant-config';
 
 
 @NgModule({
@@ -17,7 +16,6 @@ import { TenantConfig } from '../app/services/tenant-config';
     AppRoutingModule
   ],
   providers: [
-    TenantConfig,
     StatusBar,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
