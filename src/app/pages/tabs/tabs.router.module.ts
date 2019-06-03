@@ -4,7 +4,6 @@ import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { TenantPage } from '../tenant/tenant.page';
 import { TabsPage } from './tabs.page';
 import { HomePage } from '../home/home.page';
-import { ListPage } from '../list/list.page';
 import { ContactPage } from '../contact/contact.page';
 import { AuthGuardService } from '../../services/auth-route-guard';
 
@@ -26,7 +25,6 @@ const routes: Routes = [
       {
         path: 'list',
         outlet: 'list',
-        component: ListPage,
         canActivate: [AuthGuardService]
       },
       {

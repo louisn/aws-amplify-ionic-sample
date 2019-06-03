@@ -44,6 +44,7 @@ export class TenantPage implements AfterContentInit {
         this.tenantInfo = JSON.stringify(res);
         Amplify.configure({
           Auth: {
+            tenantId: res.Item.id,
             mandatorySignIn: true,
             region: res.Item.region,
             userPoolId: res.Item.id_userpool,
@@ -73,8 +74,9 @@ export class TenantPage implements AfterContentInit {
 
   getProfile() {
     console.log(Auth.currentSession());
-    debugger;
-    this.amplifyService.api().get('apv', '/user/profile/  ', {}).then((res) => {
+    const authorization = this.amplifyService.auth()._config;
+    const tenantId = authorization.tenantId ;
+    this.amplifyService.api().get('apv', '/user/profile', {headers: {'Naber-Tenancy': `${tenantId}`}}).then((res) => {
       if (!res) {
         console.log('no response from /user/profile');
       } else {

@@ -8,7 +8,6 @@ import { TabsPageRoutingModule } from './tabs.router.module';
 
 import { TabsPage } from './tabs.page';
 import { ContactPageModule } from '../contact/contact.module';
-import { ListModule } from '../list/list.module';
 import { HomePageModule } from '../home/home.module';
 import { TenantPageModule } from '../tenant/tenant.module';
 
@@ -22,7 +21,6 @@ import { AuthGuardService } from '../../services/auth-route-guard';
     TabsPageRoutingModule,
     HomePageModule,
     TenantPageModule,
-    ListModule,
     ContactPageModule
   ],
   declarations: [TabsPage],
